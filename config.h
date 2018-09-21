@@ -1,14 +1,5 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
-/*
- *      This file was manually done to allow simple build with cmake on      
- *      most common desktop systems.
- *
- */
-
-#if defined(UNIX)          //   Unix systems
-//------------------------------------------------------------
+/* config.h.  Generated from config.h.in by configure.  */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #define HAVE_ARPA_INET_H 1
@@ -16,47 +7,14 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
 
-/* Define to 1 if you have the `getifaddrs' function. */
-#define HAVE_GETIFADDRS 1
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+/* #undef HAVE_DOPRNT */
 
-/* Define to 1 if you have the <sys/ioctl.h> header file. */
-#define HAVE_SYS_IOCTL_H 1
-
-/* Define to 1 if you have the <sys/select.h> header file. */
-#define HAVE_SYS_SELECT_H 1
-
-/* Define to 1 if you have the <sys/socket.h> header file. */
-#define HAVE_SYS_SOCKET_H 1
-
-/* Define to 1 if you have the <sys/stat.h> header file. */
-#define HAVE_SYS_STAT_H 1
-
-/* Define to 1 if you have the <sys/types.h> header file. */
-#define HAVE_SYS_TYPES_H 1
-
-/* Define to 1 if you have the <unistd.h> header file. */
-#define HAVE_UNISTD_H 1
-
-/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
-#define TIME_WITH_SYS_TIME 1
-
-#if defined(__linux__)      //  Linux only
-//------------------------------------------------------------
 /* Define to 1 if you have the <endian.h> header file. */
 #define HAVE_ENDIAN_H 1
 
-/* Define to 1 if you have the <linux/if_packet.h> header file. */
-#define HAVE_LINUX_IF_PACKET_H 1
-
-//------------------------------------------------------------
-#endif 
-
-//------------------------------------------------------------
-#elif defined(_WIN32)    // Windows only
-//------------------------------------------------------------
-//  TODO ?
-//------------------------------------------------------------
-#endif /* UNIX */
+/* Define to 1 if you have the `getifaddrs' function. */
+#define HAVE_GETIFADDRS 1
 
 /* Define to 1 if you have the `inet_aton' function. */
 #define HAVE_INET_ATON 1
@@ -66,6 +24,9 @@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
+
+/* Define to 1 if you have the <linux/if_packet.h> header file. */
+#define HAVE_LINUX_IF_PACKET_H 1
 
 /* Define to 1 if your system has a GNU libc compatible `malloc' function, and
    to 0 otherwise. */
@@ -79,6 +40,9 @@
 
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H 1
+
+/* Define to 1 if you have the <ppc/endian.h> header file. */
+/* #undef HAVE_PPC_ENDIAN_H */
 
 /* Define to 1 if your system has a GNU libc compatible `realloc' function,
    and to 0 otherwise. */
@@ -119,6 +83,27 @@
 
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#define HAVE_SYS_IOCTL_H 1
+
+/* Define to 1 if you have the <sys/select.h> header file. */
+#define HAVE_SYS_SELECT_H 1
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#define HAVE_SYS_SOCKET_H 1
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#define HAVE_SYS_STAT_H 1
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#define HAVE_SYS_TYPES_H 1
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#define HAVE_UNISTD_H 1
+
+/* Define to 1 if you have the <unistd.hi> header file. */
+/* #undef HAVE_UNISTD_HI */
 
 /* Define to 1 if you have the `vprintf' function. */
 #define HAVE_VPRINTF 1
@@ -165,8 +150,20 @@
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#define TIME_WITH_SYS_TIME 1
+
 /* Version number of package */
 #define VERSION "1.1.2"
 
+/* Define to empty if `const' does not conform to ANSI C. */
+/* #undef const */
 
-#endif  /*  CONFIG_H */
+/* Define to rpl_malloc if the replacement function should be used. */
+/* #undef malloc */
+
+/* Define to rpl_realloc if the replacement function should be used. */
+/* #undef realloc */
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+/* #undef size_t */
