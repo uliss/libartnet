@@ -1,53 +1,67 @@
-
 cmake_minimum_required (VERSION 3.1)
-
 project(libartnet LANGUAGES C)
 
-set(SRC_DIR
-  "${CMAKE_CURRENT_SOURCE_DIR}/artnet")
+include(CheckIncludeFiles)
+include(CheckSymbolExists)
+include(CheckCSourceCompiles)
+
+check_include_files(linux/if_packet.h HAVE_LINUX_IF_PACKET_H)
+check_include_files(endian.h HAVE_ENDIAN_H)
+check_symbol_exists(inet_aton <arpa/inet.h> HAVE_INET_ATON)
+check_symbol_exists(getifaddrs <ifaddrs.h> HAVE_GETIFADDRS)
+check_c_source_compiles("
+#include <net/if.h>
+int main(int argc, char** argv) { struct sockaddr addr; addr.sa_len; }
+" HAVE_SOCKADDR_SA_LEN)
+
+configure_file(config.h.in config.h)
 
 set(LIBARTNET_SRCS
-  "${SRC_DIR}/artnet.c"
-  "${SRC_DIR}/misc.c"
-  "${SRC_DIR}/network.c"
-  "${SRC_DIR}/receive.c"
-  "${SRC_DIR}/tod.c"
-  "${SRC_DIR}/transmit.c"
+  artnet/artnet.c
+  artnet/misc.c
+  artnet/network.c
+  artnet/receive.c
+  artnet/tod.c
+  artnet/transmit.c
 )
 
 set(LIBARTNET_HDRS
-  "${CMAKE_CURRENT_SOURCE_DIR}/config.h"
-  "${SRC_DIR}/artnet.h"
-  "${SRC_DIR}/common.h"
-  "${SRC_DIR}/misc.h"
-  "${SRC_DIR}/packets.h"
-  "${SRC_DIR}/private.h"
-  "${SRC_DIR}/tod.h"
+  artnet/artnet.h
+  artnet/common.h
+  artnet/misc.h
+  artnet/packets.h
+  artnet/private.h
+  artnet/tod.h
 )
 
-add_library(libartnet
+add_library(libartnet STATIC
   "${LIBARTNET_HDRS}"
   "${LIBARTNET_SRCS}"
 )
 
 target_include_directories(
   libartnet
-  PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 )
 
 target_compile_definitions(
   libartnet
   PUBLIC
-  HAVE_CONFIG_H=1   # enable the config.h file
+    HAVE_CONFIG_H=1   # enable the config.h file
 )
 
 if(WIN32)
   target_link_libraries(
     libartnet
-    PUBLIC  # maybe not
-    ws2_32
-    IPHLPAPI
+    PUBLIC 
+      ws2_32
+      IPHLPAPI
    )
 endif()
 
+install(
+  TARGETS libartnet 
+  RUNTIME DESTINATION lib
+  ARCHIVE DESTINATION lib)
