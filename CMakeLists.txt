@@ -55,13 +55,13 @@ target_compile_definitions(
 if(WIN32)
   target_link_libraries(
     libartnet
-    PUBLIC 
+    PUBLIC
       ws2_32
-      IPHLPAPI
+      iphlpapi
    )
 endif()
 
 install(
-  TARGETS libartnet 
+  TARGETS libartnet
   RUNTIME DESTINATION lib
   ARCHIVE DESTINATION lib)
