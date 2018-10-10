@@ -34,27 +34,27 @@ set(LIBARTNET_HDRS
   artnet/tod.h
 )
 
-add_library(libartnet STATIC
+add_library(artnet STATIC
   "${LIBARTNET_HDRS}"
   "${LIBARTNET_SRCS}"
 )
 
 target_include_directories(
-  libartnet
+  artnet
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 )
 
 target_compile_definitions(
-  libartnet
+  artnet
   PUBLIC
     HAVE_CONFIG_H=1   # enable the config.h file
 )
 
 if(WIN32)
   target_link_libraries(
-    libartnet
+    artnet
     PUBLIC
       ws2_32
       iphlpapi
@@ -62,6 +62,11 @@ if(WIN32)
 endif()
 
 install(
-  TARGETS libartnet
+  TARGETS artnet
+  EXPORT artnet-exports
   RUNTIME DESTINATION lib
   ARCHIVE DESTINATION lib)
+
+install(EXPORT artnet-exports
+        DESTINATION lib/cmake/libartnet)
+export(EXPORT artnet-exports)
