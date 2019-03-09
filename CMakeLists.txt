@@ -7,14 +7,23 @@ include(CheckCSourceCompiles)
 
 check_include_files(linux/if_packet.h HAVE_LINUX_IF_PACKET_H)
 check_include_files(endian.h HAVE_ENDIAN_H)
-check_symbol_exists(inet_aton <arpa/inet.h> HAVE_INET_ATON)
-check_symbol_exists(getifaddrs <ifaddrs.h> HAVE_GETIFADDRS)
+check_c_source_compiles("
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+int main(int argc, char** argv) { &inet_aton; }
+" HAVE_INET_ATON)
+check_c_source_compiles("
+#include <sys/types.h>
+#include <ifaddrs.h>
+int main(int argc, char** argv) { &getifaddrs; }
+" HAVE_GETIFADDRS)
 check_c_source_compiles("
 #include <net/if.h>
 int main(int argc, char** argv) { struct sockaddr addr; addr.sa_len; }
 " HAVE_SOCKADDR_SA_LEN)
 
-configure_file(config.h.in config.h)
+configure_file(config.h.in libartnet-config.h)
 
 set(LIBARTNET_SRCS
   artnet/artnet.c

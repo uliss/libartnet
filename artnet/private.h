@@ -19,7 +19,7 @@
  */
 
 #if HAVE_CONFIG_H
-#  include <config.h>
+#  include <libartnet-config.h>
 #endif
 
 #if !defined(WIN32) && !defined(_MSC_VER)

@@ -18,7 +18,6 @@
  * Copyright (C) 2004-2007 Simon Newton
  *
  */
-
 #include <errno.h>
 
 #if !defined(WIN32) && !defined(_MSC_VER)
