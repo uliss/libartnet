@@ -5,6 +5,8 @@ include(CheckIncludeFiles)
 include(CheckSymbolExists)
 include(CheckCSourceCompiles)
 
+option(LIBARTNET_INSTALL_RULES "Enable install & export rules" ON)
+
 check_include_files(linux/if_packet.h HAVE_LINUX_IF_PACKET_H)
 check_include_files(endian.h HAVE_ENDIAN_H)
 check_c_source_compiles("
@@ -70,12 +72,14 @@ if(WIN32)
    )
 endif()
 
-install(
-  TARGETS artnet
-  EXPORT artnet-exports
-  RUNTIME DESTINATION lib
-  ARCHIVE DESTINATION lib)
+if(LIBARTNET_INSTALL_RULES)
+  install(
+    TARGETS artnet
+    EXPORT artnet-exports
+    RUNTIME DESTINATION lib
+    ARCHIVE DESTINATION lib)
 
-install(EXPORT artnet-exports
-        DESTINATION lib/cmake/libartnet)
-export(EXPORT artnet-exports)
+  install(EXPORT artnet-exports
+          DESTINATION lib/cmake/libartnet)
+  export(EXPORT artnet-exports)
+endif()
