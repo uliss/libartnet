@@ -23,6 +23,7 @@
 
 #include <errno.h>
 #include <string.h>
+#include <stdint.h>
 
 extern char artnet_errstr[256];
 void artnet_error(const char *fmt, ...);
