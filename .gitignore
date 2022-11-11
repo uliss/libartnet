@@ -1,2 +1,7 @@
 *.user
 .*
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.a
+build/
