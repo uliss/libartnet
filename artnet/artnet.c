@@ -656,6 +656,8 @@ int artnet_send_dmx(artnet_node vn,
       // Fallback to broadcast mode
       if ((ret = artnet_net_send(n, &p)))
         return ret;
+      else
+        return ARTNET_EMEM;
     }
 
     nodes = find_nodes_from_uni(&n->node_list,
