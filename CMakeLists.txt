@@ -5,7 +5,7 @@ include(CheckIncludeFiles)
 include(CheckSymbolExists)
 include(CheckCSourceCompiles)
 
-option(LIBARTNET_INSTALL_RULES "Enable install & export rules" ON)
+option(LIBARTNET_INSTALL_RULES "Enable install & export rules" OFF)
 
 check_include_files(linux/if_packet.h HAVE_LINUX_IF_PACKET_H)
 check_include_files(endian.h HAVE_ENDIAN_H)
